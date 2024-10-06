@@ -16,12 +16,16 @@ function Dropzone() {
 
   const uploadFiles = async (formData) => {
     try {
-      const response = await fetch('http://localhost:5000/api/upload', {
+      const response = await fetch('http://127.0.0.1:5000/api/upload', {
         method: 'POST',
         body: formData,
       });
 
       const data = await response.json();
+      if (response.ok) {
+        // Show a success pop-up message
+        alert(data.message);
+      }
       console.log(data.message || data.error);
     } catch (error) {
       console.error('Error uploading files:', error);

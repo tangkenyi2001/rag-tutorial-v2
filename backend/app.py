@@ -40,14 +40,15 @@ def query():
 
     if input_data is None:
         return jsonify({"error": "No input provided"}), 400
-    print(['python', 'querydata.py', input_data])  # For debugging
+    print(['python', 'query_data.py', input_data])  # For debugging
 
     # Run the querydata.py script with the input as an argument
     try:
-        result = subprocess.run(['python', 'querydata.py', input_data], check=True, capture_output=True, text=True)
+        result = subprocess.run(['venv/Scripts/python', './query_data.py', input_data], check=True, capture_output=True, text=True)
         output = result.stdout  # Get the output from the script
         return jsonify({"output": output}), 200
     except subprocess.CalledProcessError as e:
+        print(e.stderr) 
         return jsonify({"error": f"Failed to run querydata.py: {str(e)}"}), 500
     
     
