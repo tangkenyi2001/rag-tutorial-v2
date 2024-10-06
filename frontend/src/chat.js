@@ -1,7 +1,7 @@
 
 import React, { useState } from 'react';
 import ReactMarkdown from 'react-markdown';
-import { Button, Text,Textarea,Spinner} from '@chakra-ui/react'
+import { Button, Text,Textarea,Progress} from '@chakra-ui/react'
 
 
 function Chat(){
@@ -32,11 +32,7 @@ function Chat(){
             <ReactMarkdown>{reply}</ReactMarkdown></Text>
             <Textarea bg={'EDE8F5'} height={'20%'} placeholder={"Enter here!"} onChange={(e) => setQuery(((e.target.value)))}></Textarea>
             <Button height={'10%'} onClick={handleQuery}>Search</Button>
-            {isLoading && <Spinner size='lg' 
-                thickness='4px'
-                speed='0.65s'
-                emptyColor='gray.200'
-                color='blue.500'/>}
+            {isLoading && <Progress size='xs' isIndeterminate />}
         </>
         
         

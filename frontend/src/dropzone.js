@@ -1,8 +1,11 @@
 import { useDropzone } from "react-dropzone";
-
+import React, { useState } from 'react';
+import { Progress} from '@chakra-ui/react'
 function Dropzone() {
+  const [isLoading, setIsLoading] = useState(false);
   const onDrop = (acceptedFiles) => {
     // Create a FormData object to hold the files
+    setIsLoading(true);
     const formData = new FormData();
     
     // Append each accepted file to the FormData object
@@ -30,6 +33,7 @@ function Dropzone() {
     } catch (error) {
       console.error('Error uploading files:', error);
     }
+    setIsLoading(false);
   };
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop, multiple: true });
@@ -42,6 +46,7 @@ function Dropzone() {
       ) : (
         <p>Drag and drop some files here, or click to select files</p>
       )}
+      {isLoading && <Progress size='xs' isIndeterminate />}
     </div>
   );
 }

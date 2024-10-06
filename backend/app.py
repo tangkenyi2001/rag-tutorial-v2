@@ -31,6 +31,7 @@ def upload_file():
 @app.route('/api/delete', methods=['POST'])
 def clear_database():
     os.system('python cleardatainput.py')
+    os.system('python populate_database.py --reset')
     return jsonify({"message": "Data Files Cleared successfully!"}), 200
     
 @app.route('/api/query', methods=['POST'])
